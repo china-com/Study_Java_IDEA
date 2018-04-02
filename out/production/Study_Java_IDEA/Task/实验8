@@ -1,0 +1,59 @@
+package com.sayschj.jdbcdemo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class JDBCDemo {
+//	private static String createSql = "CREATE DATABASE Student";
+//	private static String createTable = "CREATE TABLE Student(sNo CHAR(11)NOT NULL PRIMARY KEY,sName CHAR(12)NOT NULL,sGrade INT";
+	private static String insertSql1 = "INSERT INTO JavaScore VALUES('24152400123','张三',59)";
+	private static String updateSql = "UPDATE JavaScore SET sGrade=99 WHERE sNo='24152400124'";
+	private static String deleteSql = "DELETE FROM JavaScore WHERE sNo='24152400123'";
+	private static String deleteSql1 = "DELETE FROM JavaScore WHERE sNo='24152400126'";
+	private static String deleteSql2= "DELETE FROM JavaScore WHERE sNo='24152400129'";
+	private static String selectSql = "SELECT * FROM JavaScore";
+	private static String driver = "com.mysql.jdbc.Driver";
+	private static String url = "jdbc:mysql://localhost:3306/Student?characterEncoding=utf8&useSSL=true";
+	private static String user = "root";
+	private static String password = "123456";
+
+	public static void main(String[] args) {
+		Connection conn =null;
+		Statement stmt =null;
+		ResultSet rs=null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			stmt = conn.createStatement();
+//			stmt.executeUpdate(createSql);
+//			stmt.executeUpdate(createTable);
+			int count=stmt.executeUpdate(insertSql1);
+//			System.out.println(count);
+			count=stmt.executeUpdate(updateSql);
+			count=stmt.executeUpdate(deleteSql);
+//			count=stmt.executeUpdate(deleteSql1);
+//			count=stmt.executeUpdate(deleteSql2);
+			rs=stmt.executeQuery(selectSql);
+			while(rs.next()){
+				String no=rs.getString("sNo");
+				String name=rs.getString("sName");
+				int grade=rs.getInt("sGrade");
+				System.out.println(no+" "+name+" "+grade);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+	}
+}

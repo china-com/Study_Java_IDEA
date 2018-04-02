@@ -1,0 +1,63 @@
+/*
+ 实验5
+1 简要阐述继承的作用，super的作用，继承中的多态、方法的重载与覆盖
+2 自行设计一个应用程序，包括类的继承，其中最好能包含构造方法、方法的重载与方法的覆盖。
+ */
+/*
+ * 方法继承：利用extends关键字一个方法继承另一个方法，而且只能直接继承一个类。
+ * super:用于调用父类的对象
+ * 方法重载：如果有两个方法的方法名相同，但参数不一致，哪么可以说一个方法是另一个方法的重载。
+ * 方法覆盖：如果在子类中定义一个方法，其名称、返回类型及参数签名正好与父类中某个方法的名称、返回类型及参数签名相匹配，那么可以说，子类的方法覆盖了父类的方法。
+ * 继承的多态：多态就是一个接口，使用不同的实例去执行不同的操作，好处就是增强程序的可扩展性及可维护性，使代码更简洁
+ */
+//自行设计一个应用程序，包括类的继承，其中最好能包含构造方法、方法的重载与方法的覆盖。
+class Car{
+	String name;
+	double price;
+	int s;
+	public Car(String name,double price,int s){
+		this.name=name;
+		this.price=price;
+		this.s=s;
+	}
+	public void carName(){
+		System.out.println("车名："+name+"价格："+price+"万");
+	}
+	public void persons(int s){
+		System.out.println("这台车能坐："+s+"人");
+	}
+}
+class SmallCar extends Car{
+	public SmallCar(String name, double price,int s) {
+		super(name, price,s);
+	}
+public void carName(){
+	super.carName();
+}
+	public void persons(){
+		System.out.println("这台车能坐："+s+"人");
+	}
+}
+class Bus extends Car{
+	public Bus(String name, double price,int s) {
+		super(name, price,s);
+	}
+	public void carName(){
+		super.carName();
+	}
+	public void persons(){
+		System.out.println("这台车能坐："+s+"人");
+	}
+}
+public class ExtendsDemo {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SmallCar s1=new SmallCar("小轿车",30,5);
+		s1.carName();
+		s1.persons();
+		Bus b1=new Bus("公交车",20,30);
+		b1.carName();
+		b1.persons();
+	}
+
+}

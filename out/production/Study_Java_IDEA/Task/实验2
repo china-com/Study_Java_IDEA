@@ -1,0 +1,39 @@
+﻿//实验2
+ public class Demo{
+ 	    static boolean flag=true;
+ 	    static int n=13;//n为键盘输入的数
+ 	    static int sum=0;//sum用于接收累加和，初始化为0
+ 	    static int L=1;//定义L为数据的阶乘，并初始化为1
+ 		public static void main(String[] args) {
+ 		/*
+ 		 从键盘上输入一个数据n,程序设计
+ 		1  求1~n的累加和；
+ 		2 求n的阶乘；
+ 		3 判断n是否为素数。
+ 		*/
+ 		
+ 		for(int i=1;i<=n;i++){
+ 			sum+=i;//求累加和
+ 			L*=i;	//求n的阶乘
+		}
+ 		System.out.println(sum);
+ 		System.out.println(L);
+ 		Demo.isPrime(n);
+ 		
+ 	 }
+ 	//3判断n是否为素数。
+ 	  static void isPrime(int n){
+ 		  for(int j=2;j<=Math.sqrt(n);j++){
+ 			  if(n%j==0){
+ 				flag=false;
+ 				break;
+ 				}
+ 			} 
+ 		  if(flag){
+ 				System.out.println(n+"是素数。");	
+ 			}
+ 			else{
+ 				System.out.println(n+"不是素数");
+ 			}
+ 	  }
+ }

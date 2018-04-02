@@ -1,0 +1,38 @@
+package com.sayschj.task;
+
+import java.io.IOError;
+import java.io.IOException;
+
+//异常
+//计算一个数字数组内的所有成员的的值之和，规定数组的元素从整数3开始
+/*
+ * 1)创建一个数字数组
+ * 2）取出数组中的每个元素相加（注意数组下表越界异常）
+ * 3）输出计算结果
+ */
+public class TaskSix {
+	public static void main(String[] args){
+		double sum=0;
+		try{
+		int[] arr=new int[]{2,3,5,8};
+		if(arr[0]<3){
+			throw new IOException();
+		}
+		for(int i=0;i<=arr.length;i++){
+			sum+=arr[i];
+		}
+		}
+		catch(IOException e){
+			System.out.println("输入异常，输入数值范围：3~+");
+		}
+		catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("数组下标异常");
+		}
+		catch(Exception e){
+			System.out.println("异常："+e.toString());
+		}
+		finally{
+			System.out.println(“数组之和为：”+sum);
+		}
+	}
+}

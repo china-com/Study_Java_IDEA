@@ -1,0 +1,71 @@
+/*
+ * 1  设计一个应用程序，包括抽象类，用继承关系得到具体类，再设主类进行测试。
+ */
+abstract class Animal{
+	public String name;
+	public int age;
+	public Animal(){
+		
+	}
+	abstract public void eat();
+	abstract public void move();
+}
+class Dog extends Animal{
+	public Dog(String name,int age){
+		this.name=name;
+		this.age=age;
+	}
+	public void eat(){
+		System.out.println("狗吃肉骨头");
+	}
+	public void move(){
+		System.out.println("狗用脚走路");
+	}
+}
+public class AbstractClass {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Animal dog1=new Dog("大白",3);
+		dog1.eat();
+		dog1.move();
+	}
+
+}
+
+------------------------
+/*
+ 2 设计一个简单的应用程序，包括内部类或者匿名内部类。
+ */
+public class Langue {
+	private String LanName;
+	private int sum;
+	class Chinese{
+		String LanName;
+		int sum;
+		public Chinese(String LanName,int sum){
+			this.LanName=LanName;
+			this.sum=sum;
+		}
+		public void outPrint(){
+			System.out.println("中国人使用："+LanName);
+			System.out.println("中国将近有"+sum+"亿人在用:"+LanName);
+		}
+	}
+	public void outPrint(){
+		Chinese c1=new Chinese("汉语",14);
+		c1.outPrint();
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Langue l1=new Langue();
+		l1.outPrint();
+	}
+
+}
