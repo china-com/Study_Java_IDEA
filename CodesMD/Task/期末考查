@@ -1,0 +1,300 @@
+package task;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+//java期末考查程序代码
+/*
+ * 设计一个XXX公司的投简历系统，通过求职者通过该系统向公司发送简历及查看是否被录取
+ * @author  陈红鹃
+ * @version v1.2
+ */
+//创建主类Resume
+public class Resume extends JFrame {
+	private static JFrame rs = new JFrame("XXX公司投简历系统");
+	//创建四个文本框
+	private static JTextField tfName = new JTextField(10);
+	private static JTextField tfPhone = new JTextField(11);
+	private static JTextField tfMail = new JTextField(11);
+	private static JTextField tfAd = new JTextField(26);
+	//创建两个组合框
+	private static String[] dep = { "安卓开发部", "IOS开发部", "前端开发", "服务器开发" };
+	private static JComboBox<String> com1 = new JComboBox<>(dep);
+	private static String[] money = { "2000~3999", "4000~5999", "6000~7999", "8000~1万", "一万以上" };
+	private static JComboBox<String> com2 = new JComboBox<>(money);
+	private static String[] email = { "qq.com", "163.com", "gmail.com", "yahoo.com", "msn.com", "foxmail.com" };
+	private static JComboBox<String> mail = new JComboBox<>(email);
+	//创建两个单选项
+	private static JRadioButton rb1 = new JRadioButton("男");
+	private static JRadioButton rb2 = new JRadioButton("女");
+	private static JTextArea ta = new JTextArea(4, 25);
+	//创建两个按钮
+	private static JButton but1 = new JButton("预览");
+	private static JButton but2 = new JButton("发送");
+	// 正则表达式：验证手机号
+	public static final String REGEX_MOBILE = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+	// 正则表达式：验证邮箱
+	public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+	//定义几个下面会用到的变量
+	static String name1;
+	static String sex1;
+	static String bu1;
+	static String qian1;
+	
+	static String phone1;
+	static String mail1;
+	static String ad1;
+	static String hobby;
+	
+	// 校验手机号
+	public static boolean isMobile(String mobile) {
+		return Pattern.matches(REGEX_MOBILE, mobile);
+	}
+
+	// 校验邮箱
+	public static boolean isEmail(String email) {
+		return Pattern.matches(REGEX_EMAIL, email);
+	}
+
+	//定义一个初始化各种组件的方法
+	public static void inita() {
+		//获取内容窗体
+		Container c1 = rs.getContentPane();
+		c1.setBackground(Color.LIGHT_GRAY);// 设置背景色为浅灰色
+		//设置框架的流式布局管理
+		c1.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+		// BoxLayout b1=new BoxLayout(pan1, BoxLayout.Y_AXIS);
+		// pan1.setLayout(b1);
+		//创建菜单“文件”菜单
+		JMenu fileMenu = new JMenu("文件(F)");
+		//设置fileMenu的热键
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		//创建“关于”的菜单项
+		JMenuItem aboutItem = new JMenuItem("关于...(A)");
+		//创建热键
+		aboutItem.setMnemonic(KeyEvent.VK_A);
+		//将“关于”添加到fileMenu菜单中
+		fileMenu.add(aboutItem);
+		//设置"关于"的监听对象，并采用匿名内部类对象来作为监听对象
+		aboutItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//消息弹窗，显示“关于”中的内容
+				JOptionPane.showMessageDialog(null, "这是我设计的一个Java期末考查应用程序", "关于", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		//设置退出项
+		JMenuItem exitItem = new JMenuItem("退出(X)");
+		exitItem.setMnemonic(KeyEvent.VK_X);
+		fileMenu.add(exitItem);
+		//退出的监听者，采用内部内来监听
+		exitItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
+		//以下是帮助菜单
+		JMenu helpMenu = new JMenu("帮助(H)");
+		helpMenu.setMnemonic(KeyEvent.VK_H);
+		JMenuItem helpItem = new JMenuItem("help");
+		helpMenu.add(helpItem);
+		
+		helpItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "Java期末考查应用程序设计");
+			}
+		});
+		//将两个菜单项添加到窗体菜单栏中
+		JMenuBar bar = new JMenuBar();
+		rs.setJMenuBar(bar);
+		bar.add(fileMenu);
+		bar.add(helpMenu);
+		c1.add(new JLabel("姓名:"));
+		c1.add(tfName);
+		tfName.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				name1=tfName.getText();
+			}
+		});
+		ButtonGroup grp = new ButtonGroup();
+		grp.add(rb1);
+		grp.add(rb2);
+		c1.add(new JLabel("                                   "));
+		c1.add(new JLabel("性别:"));
+		c1.add(rb1);
+		c1.add(rb2);
+		
+		c1.add(new JLabel("                                    "));
+		c1.add(new JLabel("竞聘部门"));
+		c1.add(com1);
+		c1.add(new JLabel("                          "));
+		c1.add(new JLabel("期望薪资"));
+		c1.add(com2);
+		c1.add(new JLabel("                                             "));
+		c1.add(new JLabel("电话:"));
+		c1.add(tfPhone);
+		
+		tfPhone.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				// TODO Auto-generated method stub
+				//获取输入的电话号码
+				phone1 = tfPhone.getText();
+				//输入的电话号码必须符号电话号码的格式，否则报出警告
+				if (!isMobile(phone1)) {
+					//通过消息通知栏了来提示错误
+					JOptionPane.showMessageDialog(null, "号码格式不正确");
+				}
+			}
+		});
+		
+		c1.add(new JLabel("                                    "));
+		c1.add(new JLabel("邮箱:"));
+		c1.add(tfMail);
+		c1.add(new JLabel("@"));
+		c1.add(mail);
+		tfMail.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//获取邮箱框中的输入
+				mail1=tfMail.getText();
+			}
+		});
+		//获取籍贯输入栏中的输入
+		c1.add(new JLabel("籍贯:"));
+		c1.add(tfAd);
+		tfAd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ad1=tfAd.getText();
+			}
+		});
+		//获取喜好输入框中的输入
+		c1.add(new JLabel("个人爱好:"));
+		c1.add(ta);
+//		
+//		ta.addCaretListener(new CaretListener() {
+//			@Override
+//			public void caretUpdate(CaretEvent e) {
+//				// TODO Auto-generated method stub
+//				hobby=(String)e.getSource();
+//			}
+//		});
+		//将按钮添加到窗体上
+		c1.add(but1);
+		c1.add(but2);
+		
+		/*
+		 * //正则表达式，验证邮箱格式是否正确 tfMail.addActionListener(new ActionListener() {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) { // TODO
+		 * Auto-generated method stub String mail1=tfMail.getText();
+		 * if(!isEmail(mail1)){ JOptionPane.showMessageDialog(null, "邮箱格式不正确");
+		 * } } });
+		 */
+		
+		com1.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				//获取点击源
+				JComboBox cb = (JComboBox) e.getSource();
+				//获取被点击对象的项目名称
+				bu1 = (String) cb.getSelectedItem();
+			}
+		});
+		
+		//获取被点击对象的项目名称
+		com2.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox cb = (JComboBox) e.getSource();
+				qian1 = (String) cb.getSelectedItem();
+			}
+		});
+		
+		//当点击预览按钮时，将上面填写过得内容以弹窗的形式显示出来
+		but1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getSource()==but1){
+					
+					if(rb1.isSelected()){
+							sex1=rb1.getText().toString();
+					}else{
+						sex1=rb2.getText().toString();
+					}
+				}
+				JOptionPane.showMessageDialog(null, "姓名:"+name1+"\n"+"性别:"+sex1+"\n"+"竞聘部门:"+bu1+"\n"+"期望薪水:"+qian1+"\n"+"电话:"+phone1+"\n"+"邮箱:"+mail1+"@qq.com"+"\n"+"籍贯:"+ad1+"\n"+"个人爱好:"+ta.getText());
+			}
+		});
+		
+		//点击“发送”按钮后，通过消息弹窗显示发送结果
+		but2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null,"发送成功!");
+			}
+		});
+	}
+	
+	//主函数
+	public static void main(String[] args) {
+		rs.setLocation(360, 120);
+		rs.setSize(320, 480);
+		rs.setResizable(false);
+		// mail.setEditable(true);
+		inita();
+		rs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		rs.setVisible(true);
+	}
+	// @Override
+	// public void itemStateChanged(ItemEvent e) {
+	// // TODO Auto-generated method stub
+	// JComboBox cb=(JComboBox)e.getSource();
+	// String str=(String)cb.getSelectedItem();
+	/*
+	 * if(str.equals("安卓开发部")){
+	 * 
+	 * }else if(str.equals("IOS开发部")){
+	 * 
+	 * }else if(str.equals("前端开发")){
+	 * 
+	 * }else if(str.equals("服务器开发")){
+	 * 
+	 * }
+	 */
+}

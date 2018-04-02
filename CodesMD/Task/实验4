@@ -1,0 +1,91 @@
+
+实验四
+作业内容
+
+学会用类创建对象、学会使用类的构造方法
+
+要求，设计一个圆类，类中有构造方法，从键盘上输入圆的半径，求圆的面积和周长。
+
+代码和运行结果截图上传。
+
+实验代码：
+
+import java.util.Scanner;
+
+ 
+
+/*
+
+ * 学会用类创建对象、学会使用类的构造方法
+
+          要求，设计一个圆类，类中有构造方法，从键盘上输入圆的半径，求圆的面积和周长。
+
+ */
+
+class Circle{
+
+         final double PI=3.14;
+
+         private int radius;
+
+         public Circle(int radius){  //构造方法
+
+                   this.radius=radius;
+
+         }
+
+         public void setCircle(int radius){//设置圆半径
+
+                   this.radius=radius;
+
+         }
+
+         public void getArea(){
+
+                   System.out.println("圆的面积为："+PI*radius*radius);
+
+         }
+
+         public void getLength(){
+
+                   System.out.println("圆的周长为："+(2*PI*radius));
+
+         }
+
+        
+
+}
+
+public class CircleMain{
+
+ 
+
+         /**
+
+          * @param args
+
+          */
+
+         public static void main(String[] args) {
+
+                   // TODO Auto-generated method stub
+
+                   Circle cir=new Circle(0);
+
+                   Scanner input=new Scanner(System.in);
+
+                   System.out.println("请输入圆的半径：");
+
+                   int radius=input.nextInt();//从键盘上输入圆的半径
+
+                   cir.setCircle(radius);
+
+                   cir.getArea();//调用CircleMain类中计算圆面积的方法
+
+                   cir.getLength();//调用CircleMain类中计算圆周长的方法
+
+ 
+
+         }
+
+}

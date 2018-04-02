@@ -1,0 +1,77 @@
+简要回答并设计
+
+1 简述OOP的三大性质：封装性、继承性和多态性。
+封装 － 确保组件不会以不可预期的方式改变其它组件的内部状态；只有在那些提供了内部状态改变方法的组件中，才可以访问其内部状态。每类组件都提供了一个与其它组件联系的接口，并规定了其它组件进行调用的方法。
+多态性 － 组件的引用和类集会涉及到其它许多不同类型的组件，而且引用组件所产生的结果依据实际调用的类型。
+继承性 － 允许在现存的组件基础上创建子类组件，这统一并增强了多态性和封装性。典型地来说就是用类来对组件进行分组，而且还可以定义新类为现存的类的扩展，这样就可以将类组织成树形或网状结构，这体现了动作的通用性。
+
+import java.util.Scanner;
+
+//实验3，方法1
+/*
+采取OOP方式球圆柱体的表面积和体积，要求圆柱体的底面圆半径和高从键盘上输入，
+可以尝试两种方式。方法1：一个源程序中只有一个类（主方法main()含其中）；方法二，
+一个源程序中有两个类，圆柱类和主类（主类又称测试类，主要包括主方法main())
+*/
+public class Cylinder{
+	static double PI=3.14;
+	public static void main(String[] args){
+		double area=0;//圆柱体的表面积
+		double volu=0;//圆柱体的体积
+		double radius;//圆柱体的底面圆半径
+		double height;//圆柱体的高
+		Scanner input=new Scanner(System.in);
+		System.out.println("请输入圆柱体的底面圆半径和高：");
+		double r=input.nextDouble();
+		radius=r;
+		double h=input.nextDouble();
+		height=h;
+		if(radius>=0&&height>=0){
+		area=PI*radius*radius*2+2*PI*radius;
+		volu=PI*radius*radius*height;
+		System.out.println("圆柱体的表面积为："+area);
+		System.out.println("圆柱体的体积："+volu);
+		}
+		else{
+			System.out.println("你的输入有误！");
+		}
+	}
+}
+import java.util.Scanner;
+
+//实验3,方法2
+/*
+方法二，一个源程序中有两个类，圆柱类和主类（主类又称测试类，主要包括主方法main())
+*/
+class Demo{
+	public static double PI=3.14;
+	private double height;
+	private double radius;
+	double area=0;//圆柱体的表面积
+	double volu=0;//圆柱体的体积
+	public void setHeight(double height){
+		this.height=height;
+	}
+	public void setRadius(double radius){
+		this.radius=radius;
+	}
+	public double getArea(){
+		return area=PI*radius*radius*2+2*PI*radius;
+	}
+	public double getVolu(){
+		return volu=PI*radius*radius*height;
+	}
+}
+public class Cylinder{
+	public static void main(String[] args){
+		System.out.println("请输入圆柱体的底面圆半径和高：");
+		Scanner input=new Scanner(System.in);
+		Demo d1=new Demo();
+		d1.setRadius(input.nextDouble());
+		d1.setHeight(input.nextDouble());
+		double s=d1.getArea();
+		double v=d1.getVolu();
+		System.out.println("圆柱体的表面积为："+s);
+		System.out.println("圆柱体的体积："+v);
+	}
+}

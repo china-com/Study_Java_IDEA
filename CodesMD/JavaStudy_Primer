@@ -1,0 +1,804 @@
+﻿学习java编程：
+在Eclipse里编写java程序代码时，可以使用Ctrl+Alt+/快捷键自动补全java关键字，也可以使用Alt+/快捷键启动Eclipse代码辅助菜单。
+一个简单的java程序：
+public class HelloJava {
+	private static String say="我要学会你。";
+
+	public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+    System.out.println("你好java,"+say);
+	}
+
+}
+
+System.out.println()方法在eclipse中可以通过输入“syso”和按Alt+/快捷键完成快速输入。
+在java代码编写时，文件名“Hello.java”必须和类名“Hello”保持一样，还要注意大小写，java是区分大小写的。
+在java的整数类型中，八进制数必须以0开头；如0123。16进制必须以0X或0x开头；如0Xb01e(十进制数位45086)。
+对于长整型long,则需在数字后面加L或l，表示该数值为长整型数，如 long num=2147483650L。
+在默认的情况下小数都被看作double型，若使用float型小数，则需要在小数后面添加F或f。可以使用后缀d或D来明确表明这是一个double类型数据，不加“d“”不会出错，但声明float型变量时如果不加“F”，系统会认为变量是double型而出错。
+当把整数赋值给一个byte,short.int,long型变量时，不可以超出这些变量的范围，否则必须进行强制转换。byte b=(byte)129;
+初学者经常会把String类型认为是java语言的基本数据类型，再次提醒大家java中并没有String类型。
+在Unicode编码和字符之间可以相互转化：
+public class Gess { // 定义类
+	public static void main(String[] args) { // 主方法
+	char word = 'a', word2 = '@'; // 定义char型变量
+	int p = 66, p2 = 45213; // 定义int型变量
+	System.out.println("a在unicode表中的顺序位置是：" + (int) word);  //97
+	System.out.println("@在unicode表中的顺序位置是：" + (int) word2); //64
+	System.out.println("unicode表中的第66位是：" + (char) p);  //B
+	System.out.println("unicode表中的第45213位是：" + (char) p2);  //?
+	}
+}
+将转义字符赋值给字符变量时，与字符常量值一样需要使用单引号。 char c1='\\';输入：\   char char1='\u66';输出：B
+常量即“final变量”，常量在整个程序中只能被赋值一次：final 数据类型 常量名称[=值]   常量名通常使用大写字母。当定义final变量属于“成员变量”时，必须在定义时就设定它的初值，否则将会产生编码错误：
+public class Part { // 新建类Part
+	// 声明常量PI，此时如不对PI进行赋值，则会出现错误提示
+	static final double PI = 3.14;
+	static int age = 23; // 声明int型变量age并进行赋值
+	
+	public static void main(String[] args) { // 主方法，以下为局部量
+		final int number; // 声明int型常量number
+		number = 1235; // 对常量进行赋值
+		age = 22; // 再次对变量进行赋值
+		// number = 1236;
+		// //错误的代码，因为number为常量，只能进行一次赋值
+		System.out.println("常量PI的值为：" + PI); // 将PI的值输出
+		System.out.println("赋值后number的值为:" +number);//将number的值输出
+		System.out.println("int型变量age的值为：" + age); // 将age的值输出
+	}
+}
+成员变量中又分为实例变量和静态变量，如果在成员变量的类型前面加上关键字static，这样的变量就为静态变量。静态变量的有效范围可以跨类，甚至可达到整个应用程序之内，对于静态变量，除了能在定义它的类内存取，还能直接以“类名.静态变量”的方式在其他类内使用。
+
+public class MapText { // 创建类
+	static int age = 20; // 声明的类变量。
+	
+	public static void map() {//以下是该方法的局部变量，只能在该方法下使用“{“与“}”
+		age = 30;
+		String name = "lili";
+	}
+	
+	public static void main(String[] args) { // 主方法
+	System.out.println(name+ "的年龄是："+age);  //错误代码局部变量不可用于主方法中
+	}
+}
+if语句中，if后面（）内的表达式必须是boolean型的，如果表达式的值为ture，则执行紧跟if语句的复合语句。  if用于判断两个数是否相等时，两个比较熟之间用“=”链接：if（x=y）{...}
+switch语句后的case后可用于比较的值必须是整形、字符型或者字符串型（jdk 1.7新增），case语句后的若干个语句直到遇到break语句为止。
+switch (表达式) {
+case 条件1:
+    语句1;
+    break;
+case 条件2:
+    语句2;
+    break;
+...
+default:
+    语句;
+    (break;)
+}
+例子：
+public class GetSwitch { // 创建类
+	public static void main(String args[]) { // 主方法
+		int week = 2; // 定义int型变量week
+		switch (week) { // 指定switch语句的表达式为变量week
+			case 1: // 定义case语句中的常量为1
+				System.out.println("Monday"); // 输出信息
+				break;
+			case 2: // 定义case语句中的常量为2
+				System.out.println("Tuesday");
+				break;
+			case 3: // 定义case语句中的常量为3
+				System.out.println("Wednesday");
+				break;
+			default: // default语句
+				System.out.println("Sorry,I don't Know");
+		}
+	}
+}
+String类提供两种查找字符的方法，即indexOf("x")（返回搜索的字符或者字符串首次出现的位置）和lastIndexOf("x")(返回搜索的字符或字符串最后一次出现的位置)，若方法返回的是-1，则表示没有检测到该字符。说明：若lastIndexOf（）方法中的参数是空字符""（没有空格），则返回的值与该字符串的=length（）方法的返回结果相同。
+String str="we are students";
+int size=str.indexOf("a");  //变量的值size的值为3，'a'的下标为3，注查：找位置为该字符在字符串中下标所对应的位置。注意：size的类型为int。
+charAt()方法用于将指定的索引(下标)处字符（可知返回值为char型）返回。str.charAt（）;
+用一个字符数组a创建String对象：
+char a[]={'g','o','o','d'};  //注意：a为字符数组
+String s=new String （a）;   等价于String s=new String("good");
+提取字符数组a中的一部分创建一个字符串对象：
+char a[]={'s','t','u','d','e','n','t'};
+String s=new String(a,2,4）；      等价于：String s=new String =(uden);
+通过字符串常量的引用赋值给一个字符串变量：String str="we";
+字符串中substring():str.substring(),一、该方法可以用来返回指定索引位置(下标)开始截取到该字符串结尾的子串：
+String str="hello world";   //第一字符串str
+String substr=str.substring(3);    //获取字符串的值即lo world
+二、返回字符串从某一索引位置开始截取至某一索引位置结束的子串：
+String str="hello world";
+String substr=str.substring(0,3);  //字符串为:hel(三位到下标为3的位置停止)
+对于字符串str，str.trim()方法返回字符串的副本，忽略前导空格和尾部空格。
+public class Blak { // 创建类
+	public static void main(String args[]) { // 主方法
+		String str = "  Java  class   "; // 定义字符串str
+		System.out.println("字符串原来的长度：" + str.length()); // 将str原来的长度输出 16
+		System.out.println("去掉空格后的长度：" + str.trim().length());
+		// 将str去掉前导和尾部的空格后的结果输出 11
+	}
+}
+
+replace（）方法可实现将指定的字符或字符串替换成新的字符或字符串(若在该字符串中oldChar重复几次，replace（）方法将会将所有oldChar全部替换)：
+str.replace(oldChar,newChar);
+public class NewStr { // 创建类
+	public static void main(String args[]) { // 主方法
+		String str = "address"; // 定义字符串str
+		 // 字符串str中的字符"a"替换成"A"后返回的新字符串newstr
+		String newstr = str.replace("a", "A");
+		System.out.println(newstr); // 将字符串newstr输出
+	}
+}
+startsWith()与endsWith（）方法用于判断字符串是否以指定的内容开始或结束，这两个方法的返回值都为boolean类型：
+public class StartOrEnd { // 创建类
+	public static void main(String args[]) { // 主方法
+		String num1 = "22045612"; // 定义字符串num1
+		String num2 = "21304578"; // 定义字符串num2
+		boolean b = num1.startsWith("22"); // 判断字符串num1是否以'22'开头
+		boolean b2 = num1.endsWith("78"); // 判断字符串num1是否以'78'开头
+		boolean b3 = num2.startsWith("22"); // 判断字符串num2是否以'22'开头
+		boolean b4 = num2.endsWith("78"); // 判断字符串num2是否以'78'开头
+		System.out.println("字符串num1是以'22'开始的吗？" + b);  //ture
+		System.out.println("字符串num1是以'78'结束的吗？" + b2); // false
+		System.out.println("字符串num2是以'22'开始的吗？" + b3); //false
+		System.out.println("字符串num2是以'78'结束的吗？" + b4); //ture
+	}
+}
+比较两个字符串的内容是否相等，使用equals（）（区分大小写）和equalsIgnoreCase（）（不区分两个字符串的大小写），返回结果仍为boolean类型：
+public class Opinion { // 创建类
+	public static void main(String args[]) { // 主方法
+		String s1 = new String("abc"); // 创建字符串对象s1
+		String s2 = new String("ABC"); // 创建字符串对象s2
+		String s3 = new String("abc"); // 创建字符串对象s3
+		boolean b = s1.equals(s2); // 使用equals()方法比较s1与s2，false
+		// 使用equalsIgnoreCase()方法比较s1与s2，true
+		boolean b2 = s1.equalsIgnoreCase(s2); 
+		System.out.println(s1 + " equals " + s2 + " :" + b); // 输出信息
+		System.out.println(s1 + " equalsIgnoreCase " + s2 + " :" + b2);
+	}
+}
+String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序小于字符串参数那么返回小于0的值，如果此字符串是按字典顺序大于字符串参数那么一个大于0的值:
+public class Wordbook { // 创建类
+	public static void main(String args[]) { // 主方法
+		String str = new String("b");
+		String str2 = new String("a"); // 用于比较的3个字符串
+		String str3 = new String("c");
+		System.out.println(str + " compareTo " + str2 + ":"
+				+ str.compareTo(str2)); // 将str与str2比较的结果输出
+		System.out.println(str + " compareTo " + str3 + ":"
+				+ str.compareTo(str3)); // 将str与str3比较的结果输出
+	}
+}
+字符串的toLowerCase(）方法可将字符串中的所有字符从大写字母改写成小写字母，toUpperCase()方法反之。
+使用split（）方法可以是字符串按指定的分割字符或字符串对内容进行分割，有一下两种形式：
+str.split(String sign分隔符//)
+str.split(String sign//分隔符,int limit//拆分次数)
+public class Division { // 创建类
+	public static void main(String args[]) { // 主方法
+		String str = new String("abc,def,ghi,gkl"); // 定义的字符串str
+		// 使用split()方法对字符串进行拆分,返回字符串数组
+		String[] newstr = str.split(",");
+		for (int i = 0; i < newstr.length; i++) { // 使用for循环遍历字符数组
+			System.out.print(newstr[i]+"\t"); // 输出信息
+		}
+		System.out.println();
+		// 对字符串进行拆分，并限定拆分次数，返回字符数组
+		String[] newstr2 = str.split(",", 2);
+		for (int j = 0; j < newstr2.length; j++) { // 循环遍历字符数组
+			System.out.print(newstr2[j]+"\t"); // 输出信息
+		}
+	}
+}
+abc	def	ghi	gkl	
+abc	def,ghi,gkl	
+String类的format()方法用于创建格式化的字符串以及连接多个字符串对象。
+public static void main(String[] args) {  
+    String str=null;  
+    str=String.format("Hi,%s", "王力");  
+    System.out.println(str);  
+    str=String.format("Hi,%s:%s.%s", "王南","王力","王张");            
+    System.out.println(str);                           
+    System.out.printf("字母a的大写是：%c %n", 'A');  
+    System.out.printf("3>7的结果是：%b %n", 3>7);  
+    System.out.printf("100的一半是：%d %n", 100/2);  
+    System.out.printf("100的16进制数是：%x %n", 100);  
+    System.out.printf("100的8进制数是：%o %n", 100);  
+    System.out.printf("50元的书打8.5折扣是：%f 元%n", 50*0.85);  
+    System.out.printf("上面价格的16进制数是：%a %n", 50*0.85);  
+    System.out.printf("上面价格的指数表示：%e %n", 50*0.85);  
+    System.out.printf("上面价格的指数和浮点数结果的长度较短的是：%g %n", 50*0.85);  
+    System.out.printf("上面的折扣是%d%% %n", 85);  
+    System.out.printf("字母A的散列码是：%h %n", 'A');  
+}  
+输出结果:
+Hi,王力  
+Hi,王南:王力.王张  
+字母a的大写是：A   
+3>7的结果是：false   
+100的一半是：50   
+100的16进制数是：64   
+100的8进制数是：144   
+50元的书打8.5折扣是：42.500000 元  
+上面价格的16进制数是：0x1.54p5   
+上面价格的指数表示：4.250000e+01   
+上面价格的指数和浮点数结果的长度较短的是：42.5000   
+上面的折扣是85%   
+字母A的散列码是：41   
+public static void main(String[] args) {  
+    String str=null;  
+    //$使用  
+    str=String.format("格式参数$的使用：%1$d,%2$s", 99,"abc");             
+    System.out.println(str);                       
+    //+使用  
+    System.out.printf("显示正负数的符号：%+d与%d%n", 99,-99);  
+    //补O使用  
+    System.out.printf("最牛的编号是：%03d%n", 7);  
+    //空格使用  
+    System.out.printf("Tab键的效果是：% 8d%n", 7);  
+    //.使用  
+    System.out.printf("整数分组的效果是：%,d%n", 9989997);  
+    //空格和小数点后面个数  
+    System.out.printf("一本书的价格是：% 50.5f元%n", 49.8);  
+}  
+输出结果:
+格式参数$的使用：99,abc  
+显示正负数的符号：+99与-99  
+最牛的编号是：007  
+Tab键的效果是：       7  
+整数分组的效果是：9,989,997  
+一本书的价格是:   49.80000元  
+
+日期和事件字符串格式化
+在程序界面中经常需要显示时间和日期，但是其显示的 格式经常不尽人意，需要编写大量的代码经过各种算法才得到理想的日期与时间格式。字符串格式中还有%tx转换符没有详细介绍，它是专门用来格式化日期和时 间的。%tx转换符中的x代表另外的处理日期和时间格式的转换符，它们的组合能够将日期和时间格式化成多种格式。
+c 包括全部日期和时间信息 星期六 十月 27 14:21:20 CST 2007
+F “年-月-日”格式 2007-10-27
+D “月/日/年”格式 10/27/07
+r “HH:MM:SS PM”格式（12时制） 02:25:51 下午
+T “HH:MM:SS”格式（24时制） 14:28:16
+R “HH:MM”格式（24时制） 14:28
+public static void main(String[] args) {  
+    Date date=new Date();                                  
+    //c的使用  
+    System.out.printf("全部日期和时间信息：%tc%n",date);          
+    //f的使用  
+    System.out.printf("年-月-日格式：%tF%n",date);  
+    //d的使用  
+    System.out.printf("月/日/年格式：%tD%n",date);  
+    //r的使用  
+    System.out.printf("HH:MM:SS PM格式（12时制）：%tr%n",date);  
+    //t的使用  
+    System.out.printf("HH:MM:SS格式（24时制）：%tT%n",date);  
+    //R的使用  
+    System.out.printf("HH:MM格式（24时制）：%tR",date);  
+}  
+输出结果:
+全部日期和时间信息：星期一 九月 10 10:43:36 CST 2012  
+年-月-日格式：2012-09-10  
+月/日/年格式：09/10/12  
+HH:MM:SS PM格式（12时制）：10:43:36 上午  
+HH:MM:SS格式（24时制）：10:43:36  
+HH:MM格式（24时制）：10:43  
+定义日期格式的转换符可以使日期通过指定的转换符生成新字符串。
+
+public static void main(String[] args) {  
+    Date date=new Date();                                      
+    //b的使用，月份简称  
+    String str=String.format(Locale.US,"英文月份简称：%tb",date);       
+    System.out.println(str);                                                                              
+    System.out.printf("本地月份简称：%tb%n",date);  
+    //B的使用，月份全称  
+    str=String.format(Locale.US,"英文月份全称：%tB",date);  
+    System.out.println(str);  
+    System.out.printf("本地月份全称：%tB%n",date);  
+    //a的使用，星期简称  
+    str=String.format(Locale.US,"英文星期的简称：%ta",date);  
+    System.out.println(str);  
+    //A的使用，星期全称  
+    System.out.printf("本地星期的简称：%tA%n",date);  
+    //C的使用，年前两位  
+    System.out.printf("年的前两位数字（不足两位前面补0）：%tC%n",date);  
+    //y的使用，年后两位  
+    System.out.printf("年的后两位数字（不足两位前面补0）：%ty%n",date);  
+    //j的使用，一年的天数  
+    System.out.printf("一年中的天数（即年的第几天）：%tj%n",date);  
+    //m的使用，月份  
+    System.out.printf("两位数字的月份（不足两位前面补0）：%tm%n",date);  
+    //d的使用，日（二位，不够补零）  
+    System.out.printf("两位数字的日（不足两位前面补0）：%td%n",date);  
+    //e的使用，日（一位不补零）  
+    System.out.printf("月份的日（前面不补0）：%te",date);  
+}  
+输出结果
+
+[plain] view plain copy
+英文月份简称：Sep  
+本地月份简称：九月  
+英文月份全称：September  
+本地月份全称：九月  
+英文星期的简称：Mon  
+本地星期的简称：星期一  
+年的前两位数字（不足两位前面补0）：20  
+年的后两位数字（不足两位前面补0）：12  
+一年中的天数（即年的第几天）：254  
+两位数字的月份（不足两位前面补0）：09  
+两位数字的日（不足两位前面补0）：10  
+月份的日（前面不补0）：10  
+和日期格式转换符相比，时间格式的转换符要更多、更精确。它可以将时间格式化成时、分、秒甚至时毫秒等单位。格式化时间字符串的转换符如图所示。
+H 位数字24时制的小时（不足2位前面补0） 15
+I 2位数字12时制的小时（不足2位前面补0） 03
+k 2位数字24时制的小时（前面不补0） 15
+l 2位数字12时制的小时（前面不补0） 3
+M 2位数字的分钟（不足2位前面补0） 03
+S 2位数字的秒（不足2位前面补0） 09
+L 3位数字的毫秒（不足3位前面补0）015
+N 9位数字的毫秒数（不足9位前面补0） 562000000
+p 小写字母的上午或下午标记 中：下午 英：pm
+z 相对于GMT的RFC822时区的偏移量 +0800
+Z 时区缩写字符串 CST
+s 1970-1-1 00:00:00 到现在所经过的秒数 1193468128
+Q 1970-1-1 00:00:00 到现在所经过的毫秒数 1193468128984
+public static void main(String[] args) {  
+    Date date = new Date();  
+    //H的使用  
+    System.out.printf("2位数字24时制的小时（不足2位前面补0）:%tH%n", date);  
+    //I的使用  
+    System.out.printf("2位数字12时制的小时（不足2位前面补0）:%tI%n", date);  
+    //k的使用  
+    System.out.printf("2位数字24时制的小时（前面不补0）:%tk%n", date);  
+    //l的使用  
+    System.out.printf("2位数字12时制的小时（前面不补0）:%tl%n", date);  
+    //M的使用  
+    System.out.printf("2位数字的分钟（不足2位前面补0）:%tM%n", date);  
+    //S的使用  
+    System.out.printf("2位数字的秒（不足2位前面补0）:%tS%n", date);  
+    //L的使用  
+    System.out.printf("3位数字的毫秒（不足3位前面补0）:%tL%n", date);  
+    //N的使用  
+    System.out.printf("9位数字的毫秒数（不足9位前面补0）:%tN%n", date);  
+    //p的使用  
+    String str = String.format(Locale.US, "小写字母的上午或下午标记(英)：%tp", date);  
+    System.out.println(str);   
+    System.out.printf("小写字母的上午或下午标记（中）：%tp%n", date);  
+    //z的使用  
+    System.out.printf("相对于GMT的RFC822时区的偏移量:%tz%n", date);  
+    //Z的使用  
+    System.out.printf("时区缩写字符串:%tZ%n", date);  
+    //s的使用  
+    System.out.printf("1970-1-1 00:00:00 到现在所经过的秒数：%ts%n", date);  
+    //Q的使用  
+    System.out.printf("1970-1-1 00:00:00 到现在所经过的毫秒数：%tQ%n", date);  
+}  
+输出结果:
+2位数字24时制的小时（不足2位前面补0）:11  
+2位数字12时制的小时（不足2位前面补0）:11  
+2位数字24时制的小时（前面不补0）:11  
+2位数字12时制的小时（前面不补0）:11  
+2位数字的分钟（不足2位前面补0）:03  
+2位数字的秒（不足2位前面补0）:52  
+3位数字的毫秒（不足3位前面补0）:773  
+9位数字的毫秒数（不足9位前面补0）:773000000  
+小写字母的上午或下午标记(英)：am  
+小写字母的上午或下午标记（中）：上午  
+相对于GMT的RFC822时区的偏移量:+0800  
+时区缩写字符串:CST  
+1970-1-1 00:00:00 到现在所经过的秒数：1347246232  
+1970-1-1 00:00:00 到现在所经过的毫秒数：1347246232773 
+正则表达式：
+public class Judge {
+	public static void main(String[] args) {
+		 // 定义要匹配E_mail地址的正则表达式
+		String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
+		String str1 = "aaa@"; // 定义要进行验证的字符串
+		String str2 = "aaaaa";
+		String str3 = "1111@111ffyu.dfg.com";
+		if (str1.matches(regex)) { // 判断字符串变量是否与正则表达式匹配
+			System.out.println(str1 + "是一个合法的E-mail地址格式");
+		}
+		if (str2.matches(regex)) {
+			System.out.println(str2 + "是一个合法的E-mail地址格式");
+		}
+		if (str3.matches(regex)) {
+			System.out.println(str3 + "是一个合法的E-mail地址格式");
+		}
+	}
+}
+输出：1111@111ffyu.dfg.com是一个合法的E-mail地址格式
+在程序中频繁添加字符最好使用StringBuilder对象，最后输出果时可使用toString()方法，
+（1）append()用于向字符串追加内容；
+（2）insert（int offset，arg）:
+StringBuilder bf=new StringBuilder("hello");
+bf.insert(5,"word");   //添加至字符生成器的内容
+System.out.println(bf.toString());//此时输出信息为helloword
+（3）delete（int start，int end）
+StringBuilder bf=new StringBuilder("StringBuilder");
+bf.delete(5,10);
+System.out.println(bf.toString());//输出Strinder
+
+//该类中的主方法调用静态成员并在控制台中输出
+public class Demo {
+	static double PI=3.14;//因为要在static主方法中使用，所以在类中定义为静态常量
+	static int id;//在类中定义静态变量
+	public void method2() {
+		System.out.println(Demo.PI);//调用静态常量
+		System.out.println(Demo.id);//调用静态变量
+		Demo.method1();//调用静态方法
+	}
+	public static void method1() {
+		//doSomething
+	}
+}
+1）在静态方法中不可以使用this关键字
+2）静态方法中不可直接调用非静态方法
+java中规定，不能在方法体内的局部变量声明为static，下列为错误示范：
+public class example{
+	public void method(){
+		static int i=0;
+	}
+}
+
+//在该类中说明对象是如何调用类成员的
+public class Demo {
+	int i=47;//定义成员变量   //static int i=47;若将i定义为静态变量，两个对象修改的地方为同一处，此时t1的输出为60
+	public void call(){//定义成员方法
+		System.out.println("调用call（）方法");
+		for(int i=0;i<3;i++){
+			System.out.print(i+" ");
+			if(i==2){
+				System.out.println("\n");
+			}
+		}
+	}
+	public Demo(){//定义构造方法，不写时系统自动生成
+	}
+	public static void main(String[] args){
+		Demo t1=new Demo();//创建一个对象
+		Demo t2=new Demo();//创建另一个对象
+		t2.i=60;//将类成员变量赋值为60
+		//使用第一个对象调用类成员变量
+		System.out.println("第一个实例对象调用变量i的结果："+t1.i++);
+		t1.call();//使用第一个对象调用类成员方法
+		//使用第二个对象调用类成员变量
+		System.out.println("第二个实例对象调用变量i的结果："+t2.i);
+		t2.call();//使用第二个对象调用类成员方法
+	}
+}
+输出：
+第一个实例对象调用变量i的结果：47
+调用call（）方法
+0 1 2 
+
+第二个实例对象调用变量i的结果：60
+调用call（）方法
+0 1 2 
+
+成员变量在创建时，若非有设定初始值，则系统会自动初始化成员变量，初始值与数组被初始化的初始值一样，static修饰的变量和局部变量在定义时必须进行初始化。
+在public类中可以建立一些方法，并且方法前用static修饰，这样就可以用主方法（public ~static~ void main（））来调用。而在public的类以外定义的类里的方法则不能用static修饰。
+//定义类与对象
+class Servant{//定义一个佣人类
+	int age;//定义该类的一个属性/年龄
+	int height;//定义身高
+	String name;//定义名字
+	void shopping(){//定义该类的一个行为/方法
+		System.out.println("去购物。。。。");
+	}
+	void cook(){//做饭方法
+		System.out.println("去做饭。。。。");
+	}
+	void wash(){//洗碗方法
+		System.out.println("去洗碗。。。。");
+	}
+}
+class Coder{//建立一个Coder类，这里servant和coder两个类是根据职业的不同来建立的
+	void coding(){
+		System.out.println("疯狂的写代码");
+	}
+}
+public class Demo {
+	public static void main(String[] args){//主方法
+	//创建一个佣人对象s1
+	Servant s1=new Servant();
+	//给小丽设置姓名和年龄
+	s1.name="小丽";
+	s1.age=19;
+	System.out.println(s1.name+","+s1.age);
+	//调用小丽的买菜，做饭，洗碗的功能
+	s1.shopping();
+	s1.cook();
+	s1.wash();
+	//调用程序员写代码的功能
+	//先要创建一个Coder的对象，来写代码
+	Coder c1=new Coder();
+	c1.coding();
+	}
+}
+包：
+关键字：package
+语法格式：package 包名（.子包名.子子包名）；必须把该语句放在java文件中，并且是第一行代码（所有代码之前）
+此时编译命令：javac -d . java文件名.java
+运行命令：java 包名.类名
+//演示this关键字的使用
+class User{
+	private String name;//名称
+	private int age;//年龄
+	public String getName(){//不需要参数，调用就行
+		return name;//返回name字段
+	}
+	public void setName(String name){
+		this.name=name;
+	}
+//	public void setName(String name){
+//		name=name;//输出：null，遵循就近原则，此时两个name都是指形参name，初始值为null
+//	}
+//	public void setName(String n){//不需要返回值，需要参数
+//		name=n;
+//	}
+	public int getAge(){
+		return age;
+	}
+	public void setAge(int age){
+		this.age=age;
+	}
+	//打印当前对象的name和age，
+	public void show(){//this表示当前对象的...
+		System.out.println(this.name+","+this.age);
+	}
+}
+public class Demo {
+	public static void main(String[] args){
+	User s1=new User();
+	s1.setName("will");
+	s1.setAge(17);
+	s1.show();//显示出s1自己的name和age
+	User s2=new User();
+	s2.setName("lucy");
+	s2.setAge(19);
+	s2.show();//显示出s2自己的name和age
+	}
+}
+输出：
+will,17//此时this就是指s1
+lucy,19//此时的this是指s2
+
+//演示继承
+//人类，用于继承的父类
+class Person{
+	String name;
+	int age;
+	public void sleep(){
+		System.out.println("睡觉");
+	}
+}
+//学生类
+class Student extends Person{//继承父类
+//	String name;
+//	int age;
+	long ID;
+//	public void sleep(){
+//		System.out.println("睡觉");
+//	}
+}
+//老师类
+class Teacher extends Person{//继承父类
+//	String name;
+//	int age;
+	String level;//级别
+//	public void sleep(){
+//		System.out.println("睡觉");
+//	}
+}
+//员工
+class Employee extends Person{//继承父类
+//	String name;
+//	int age;
+	String hireDate;//入职时间
+//	public void sleep(){
+//		System.out.println("睡觉");
+//	}
+}
+public class ExtendsDemo{
+	public static void main(String[] args){
+		Teacher t1=new Teacher();
+		System.out.println(t1.age=34);
+	}
+}
+输出：34
+
+//将构造器中的数据传到hhh方法中
+class SuperClass{
+	private String name;
+	private int age;
+	private long ID;
+	public SuperClass(String name,int age,long ID){
+		this.name=name;
+		this.age=age;
+		this.ID=ID;
+	}
+	public void hhh(SuperClass p){//参数
+		System.out.println("姓名："+this.name+"；"+"年龄："+this.age+"；"+"编号："+this.ID);
+	}
+}
+public class ExtendsDemo{
+	public static void main(String[] args){
+		SuperClass s=new SuperClass("小何",34,123456);
+		s.hhh(s);//此时括号里的s相当于("小何",34,123456)，也就是SuperClass的一个具体对象
+	}
+}
+输出：
+姓名：小何；年龄：34；编号：123456
+
+//演示多态
+//动物类
+class Animal{
+	public void eat(){
+		System.out.println("吃食物");
+	}
+}
+//狗类
+class Dog extends Animal{
+	public void eat(){
+		System.out.println("吃肉骨头");
+	}
+}
+//猫类
+class Cat extends Animal{
+	public void eat(){
+		System.out.println("吃鱼");
+	}
+}
+public class Demo{
+	public static void main(String[] args){
+//		Dog d=new Dog();
+//		d.eat();
+//		Cat c=new Cat();
+//		c.eat();
+		Animal a=new Dog();
+		a.eat();
+		a=new Cat();
+		a.eat();
+	}
+}
+输出：
+吃肉骨头
+吃鱼
+
+//演示多态，不同于继承关系，在多态中需要父类中也拥有子类中的某方法才能编译通过
+//比如父类:动物(里面拥有很多具体的动物)  子类(具体为狗)够具有吃骨头的动作但很多其他动物则不具有
+//此时不强行要求其他动物也去吃骨头
+/*情形1：父类中拥有dowork()方法而子类中没有
+class SuperClass{
+	public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+class SubClass extends SuperClass{
+	
+}
+public class Demo{
+	public static void main(String[] args){
+		SuperClass s=new SubClass();
+		s.doWork();
+	}
+}
+//输出：SuperClass，方法调用时，先在子类中找，若子类中没有找到
+//则去父类中找（子类没有对父类的行为进行拓展，沿用父类的行为）
+*/
+/*情形2：父类中没有dowork()方法而子类中拥有doWork（）方法
+class SuperClass{
+	
+}
+class SubClass extends SuperClass{
+	public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+public class Demo{
+	public static void main(String[] args){
+		SuperClass s=new SubClass();
+		s.doWork();
+	}
+}
+//编译报错：提示父类中没有doWork()方法
+ *在多态的情况下：必须要求父类拥有某个方法，而后子类在该方法的基础上进行拓展
+ *如动物可以吃食物-->狗吃骨头
+*/
+
+/*情形3：父类中和子类都拥有doWork（）方法
+class SuperClass{
+	public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+class SubClass extends SuperClass{
+	public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+public class Demo{
+	public static void main(String[] args){
+		SuperClass s=new SubClass();
+		s.doWork();
+	}
+}
+//输出：SuperClass
+*/
+/*情形4：父类中和子类都拥有doWork（）方法,但是doWork()是静态方法
+ * 此时这种情况我们称之为隐藏，而不叫方法覆盖
+ */
+class SuperClass{//编译类型
+	static public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+class SubClass extends SuperClass{//运行类型
+	static public void doWork(){
+		System.out.println("SuperClass");
+	}
+}
+public class Demo{
+	public static void main(String[] args){
+		SuperClass s=new SubClass();
+		s.doWork();
+	}
+}
+//输出：SuperClass
+//静态方法的调用只需要类即可，如果使用对象来调用静态方法
+//其实使用的是对象的编译类型来调用静态方法和对象没有关系
+
+
+interface GSM{//全球移动通信系统,移动电话标准
+	void call();
+	void surf();
+}
+class ThreeG implements GSM{//3G
+	public void call(){
+		System.out.println("3G电话通信");
+	}
+	public void surf(){
+		System.out.println("3G上网冲浪");
+	}
+}
+class FourG implements GSM{//4G
+	public void call(){
+		System.out.println("4G电话通信");
+	}
+	public void surf(){
+		System.out.println("4G上网冲浪");
+	}
+}
+class MobliePhone{
+	public void phone(GSM gsm){//传入一个GSM类型的对象参数
+		gsm.call();//此时的对象调用call方法
+		gsm.surf();
+	}
+}
+public class Test{
+	public static void main(String[] args){
+		/*
+		 GSM t=new ThreeG();
+		 GSM f=new FourG();
+		 MobliePhone m=new MobliePhone();
+		 m.phone(t);
+		 m.phone(f);
+		 */
+		MobliePhone m=new MobliePhone();
+		m.phone(new ThreeG());
+		m.phone(new FourG());
+	}
+}
+输出：
+3G电话通信
+3G上网冲浪
+4G电话通信
+4G上网冲浪
+
+
+public class TestDemo{
+	String name="小七";
+	static int age=21;
+	public static void main(String[] args){
+		System.out.println(age);//21;静态方法中可以直接访问外部的静态成员
+		System.out.println(new TestDemo().name);//小七;静态方法中不能直接访问非静态的成员，可以通过创建相应的类对象来完成调用
+	}
+}
